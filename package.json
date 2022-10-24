@@ -1,0 +1,28 @@
+{
+  "name": "asha-db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SwapnilMeshram19/asha-DB.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SwapnilMeshram19/asha-DB/issues"
+  },
+  "homepage": "https://github.com/SwapnilMeshram19/asha-DB#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.6.7",
+    "nodemon": "^2.0.20"
+  }
+}
