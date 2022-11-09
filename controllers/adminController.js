@@ -1,9 +1,9 @@
-const AdminUser = require("../database/adminUser");
 const bycrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = "IKPR45PKGV4895JL845LTY";
+const AdminUser=require('../models/admin')
 
-async function register(req, res) {
+exports.register = async (req, res) => {
   let { email, name, password } = req.body;
 
   const user = await AdminUser.findOne({
@@ -17,7 +17,7 @@ async function register(req, res) {
     });
   }
 
-  password =await bycrypt.hash(password, 10);
+  password = await bycrypt.hash(password, 10);
 
   await AdminUser.create({
     name,
@@ -29,9 +29,9 @@ async function register(req, res) {
     response: "success",
     message: "user created successfully",
   });
-}
+};
 
-async function login(req, res) {
+exports.login=async (req, res)=> {
   let { name, password } = req.body;
 
   const user = await AdminUser.findOne({
@@ -45,13 +45,13 @@ async function login(req, res) {
     });
   }
 
-  const matched =bycrypt.compareSync(password,user.password);
+  const matched = bycrypt.compareSync(password, user.password);
 
   if (matched) {
     const { name } = user;
     const token = jwt.sign(
       {
-        name
+        name,
       },
       SECRET_KEY
     );
@@ -71,7 +71,7 @@ async function login(req, res) {
   }
 }
 
-async function getLoggedInUser(req, res) {
+exports.getLoggedInUser = async(req, res) => {
 
     const token=req.headers['auth-token']
 
@@ -111,9 +111,3 @@ async function getLoggedInUser(req, res) {
         message:"invalid token"
     })
 }
-
-module.exports = {
-  register,
-  login,
-  getLoggedInUser,
-};

@@ -1,6 +1,5 @@
 const express=require('express');
 const connectDb=require("./database/index");
-const { getLoggedInUser, login, register } = require('./auth/admin');
 const cors=require('cors');
 const app=express();
 app.use(cors())
@@ -15,11 +14,8 @@ function logger(req,res,next){
 
 app.use(logger);
 
+app.use('/admin',require('./routes/admin_route'))
 
-
-app.post('/adminRegister',register);
-app.post('/adminLogin',login);
-app.get('/adminLoggedInUser',getLoggedInUser);
 
 
 
