@@ -1,6 +1,6 @@
 const mongoose =require("mongoose");
 
-const schema=new mongoose.Schema({
+const adminSchema=new mongoose.Schema({
     name:String,
     email:String,
     password:String
@@ -8,5 +8,5 @@ const schema=new mongoose.Schema({
     timestamps:true
 })
 
-const AdminUser=mongoose.model("AdminUser",schema);
+const AdminUser=mongoose.model("AdminUser",adminSchema);
 module.exports=AdminUser;

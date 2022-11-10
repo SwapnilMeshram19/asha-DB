@@ -14,7 +14,8 @@ function logger(req,res,next){
 
 app.use(logger);
 
-app.use('/admin',require('./routes/admin_route'))
+app.use('/admin',require('./routes/admin_route'));
+app.use('/event',require('./routes/event_route'));
 
 
 

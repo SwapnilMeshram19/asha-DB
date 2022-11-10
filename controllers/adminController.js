@@ -1,7 +1,7 @@
 const bycrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = "IKPR45PKGV4895JL845LTY";
-const AdminUser=require('../models/admin')
+const AdminUser=require('../models/adminSchema')
 
 exports.register = async (req, res) => {
   let { email, name, password } = req.body;

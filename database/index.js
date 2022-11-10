@@ -1,8 +1,8 @@
 const mongoose =require('mongoose');
+const config=require('../config');
 async function connectDb(){
     return new Promise((resolve,reject)=>{
-        const url="mongodb+srv://sam:Sam%401908@cluster0.1chu4rs.mongodb.net/?retryWrites=true&w=majority";
-        mongoose.connect(url,(err)=>{
+        mongoose.connect(config.MONGO_URI,(err)=>{
             if(err){
                 return reject(err)
             }
