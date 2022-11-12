@@ -1,11 +1,16 @@
 const express=require('express');
 const connectDb=require("./database/index");
+const bodyParser = require("body-parser");
 const cors=require('cors');
 const app=express();
 app.use(cors())
 
 const port=8080;
 app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 
 function logger(req,res,next){
     console.log(new Date(), req.method, req.url);

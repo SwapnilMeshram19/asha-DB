@@ -11,42 +11,42 @@ exports.event=(req,res,next)=>{
      
     } 
 
-    //convert images into base 64 encoding
-    // let imgArray=files.map((file)=>{
-    //     let img=fs.readFileSync(file.path);
-    //     return encode_image= img.toString('base64');
-    // })
+    // convert images into base 64 encoding
+    let imgArray=files.map((file)=>{
+        let img=fs.readFileSync(file.path);
+        return encode_image= img.toString('base64');
+    })
 
-// let result=imgArray.map((src,index)=>{
-//         let finalImg={
-//             filename:files[index],
-//             contentType:files[index].imgType,
-//             imageBase64:src
-//         }
-//         let newUpload=new UploadModel(finalImg);
-//         return newUpload
-//         .save()
-//         .then(()=>{
-//             return {msg:`upload successful`}
-//         })
-//         .catch(error=>{
-//             if(error){
-//                 if(error.name==='MongoError' && error.code ===1000){
-//                     return Promise.reject({error:`Duplicate`})
-//                 }
-//                 return Promise.reject({error:error.message||`cannot upload`})
-//             }
-//         })
-//     })
+let result=imgArray.map(async(src,index)=>{
+        let finalImg={
+            filename:files[index].originalname,
+            contentType:files[index].mimetype,
+            imageBase64:src
+        }
+        let newUpload=new eventSchema(finalImg);
+        return newUpload
+        .save()
+        .then(()=>{
+            return {msg:`upload successful`}
+        })
+        .catch(error=>{
+            if(error){
+                if(error.name==='MongoError' && error.code ===11000){
+                    return Promise.reject({error:`Duplicate`})
+                }
+                return Promise.reject({error:error.message||`cannot upload`})
+            }
+        })
+    })
 
-    // Promise.all(result)
-    // .then(msg=>{
-    //     res.json(msg)
-    // }).catch(error=>{
-    //     res.json(error)
-    // })
+    Promise.all(result)
+    .then(msg=>{
+        res.json(msg)
+    }).catch(error=>{
+        res.json(error)
+    })
 
-    res.json(files)
+    // res.json(imgArray)
 
 }
 
