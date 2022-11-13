@@ -1,7 +1,7 @@
 const bycrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = "IKPR45PKGV4895JL845LTY";
-const AdminUser=require('../models/adminSchema')
+const AdminUser = require("../models/adminSchema");
 
 exports.register = async (req, res) => {
   let { email, name, password } = req.body;
@@ -31,7 +31,7 @@ exports.register = async (req, res) => {
   });
 };
 
-exports.login=async (req, res)=> {
+exports.login = async (req, res) => {
   let { name, password } = req.body;
 
   const user = await AdminUser.findOne({
@@ -69,45 +69,41 @@ exports.login=async (req, res)=> {
       message: "Invalid Password",
     });
   }
-}
+};
 
-exports.getLoggedInUser = async(req, res) => {
+exports.getLoggedInUser = async (req, res) => {
+  const token = req.headers["auth-token"];
 
-    const token=req.headers['auth-token']
-
-    if(token){
-        try {
-            jwt.verify(token, SECRET_KEY);
-        } catch (error) {
-            return res.status(400).send({
-                response:'error',
-                message:'bad token'
-            })
-        }
-        
-        const decoded=jwt.decode(token);
-
-        const user=await AdminUser.findOne({
-            name:decoded.name
-        })
-
-        if(user){
-            const {name}=user;
-            return res.send({
-                user:{
-                    name
-                }
-            })
-        }else{
-
-        }
-
-    }else{
-
+  if (token) {
+    try {
+      jwt.verify(token, SECRET_KEY);
+    } catch (error) {
+      return res.status(400).send({
+        response: "error",
+        message: "bad token",
+      });
     }
 
-    return res.status({
-        response:'error',
-        message:"invalid token"
-    })
-}
+    const decoded = jwt.decode(token);
+
+    const user = await AdminUser.findOne({
+      name: decoded.name,
+    });
+
+    if (user) {
+      const { name } = user;
+      return res.send({
+        user: {
+          name,
+        },
+      });
+    } else {
+    }
+  } else {
+  }
+
+  return res.status({
+    response: "error",
+    message: "invalid token",
+  });
+};
