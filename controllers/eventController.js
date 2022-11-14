@@ -1,7 +1,7 @@
 const Event = require("../models/eventSchema");
 const fs = require("fs");
 
-exports.event = async (req, res, next) => {
+exports.addEvent = async (req, res, next) => {
   try {
     const { title, description } = req.body;
     let files = req.files;
@@ -50,5 +50,16 @@ exports.event = async (req, res, next) => {
   } catch (error) {
     console.log(error);
     res.send("something wrong happens");
+  }
+};
+
+exports.getEvents = async (req, res) => {
+  try {
+    const data = await Event.find();
+    console.log(data);
+    res.send(data);
+  } catch (error) {
+    console.log(error);
+    res.send(error);
   }
 };

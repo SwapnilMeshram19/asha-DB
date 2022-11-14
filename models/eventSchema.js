@@ -14,7 +14,6 @@ const eventSchema = new mongoose.Schema({
       filename: {
         type: String,
         required: true,
-        sparse: true,
       },
       contentType: {
         type: String,
