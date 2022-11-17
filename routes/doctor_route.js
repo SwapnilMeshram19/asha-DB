@@ -5,4 +5,4 @@ const store = require("../middleware/multer");
 doctorRoute.post("/adddoctor", store, addDoctor);
 doctorRoute.get("/getdotors", getDoctors);
 
-module.exports = eventRoute;
+module.exports = doctorRoute;

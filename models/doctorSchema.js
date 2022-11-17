@@ -1,14 +1,19 @@
 const mongoose = require("mongoose");
 
 const doctorSchema = new mongoose.Schema({
-  title: {
+  name: {
     type: String,
     required: true,
   },
-  description: {
+  designation: {
     type: String,
     required: true,
   },
+  specialities: {
+    type: String,
+    required: true,
+  },
+  
   profile_photo: 
     {
       filename: {
