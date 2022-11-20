@@ -3,8 +3,10 @@ const fs = require("fs");
 
 exports.addDoctor = async (req, res, next) => {
   try {
-    const { title, designation, specialities } = req.body;
-    let file = req.files;
+    const { name, designation, specialities } = req.body;
+    // console.log(req.file)
+    let file = req.file;
+    // console.log(file)
     if (!file) {
       const error = new Error("Please choose files");
       error.httpStatusCode = 400;
@@ -16,9 +18,9 @@ exports.addDoctor = async (req, res, next) => {
     let img = fs.readFileSync(file.path).toString("base64");
 
     let result = {
-      filename: img.originalname,
-      contentType: img.mimetype,
-      imageBase64: img.src,
+      filename: file.filename,
+      contentType: file.mimetype,
+      imageBase64: file.src,
     };
 
     fs.unlink(file.path, (error) => {
@@ -27,7 +29,7 @@ exports.addDoctor = async (req, res, next) => {
       }
     });
 
-    let data = { title, designation, specialities, profile_photo: result };
+    let data = { name, designation, specialities, profile_photo: result };
     const doctorUpload = await Doctor.create(data);
     return res.send("created");
   } catch (error) {

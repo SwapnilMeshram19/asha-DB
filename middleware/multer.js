@@ -9,5 +9,7 @@ let storage = multer.diskStorage({
   },
 });
 
-store = multer({ storage: storage }).array("images", 10);
-module.exports = store;
+multipleImage = multer({ storage: storage }).array("images", 10);
+singleImage=multer({storage:storage}).single('profile_photo');
+
+module.exports = {multipleImage,singleImage};
