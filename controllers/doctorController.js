@@ -4,9 +4,7 @@ const fs = require("fs");
 exports.addDoctor = async (req, res, next) => {
   try {
     const { name, designation, specialities } = req.body;
-    // console.log(req.file)
     let file = req.file;
-    // console.log(file)
     if (!file) {
       const error = new Error("Please choose files");
       error.httpStatusCode = 400;
@@ -31,7 +29,7 @@ exports.addDoctor = async (req, res, next) => {
 
     let data = { name, designation, specialities, profile_photo: result };
     const doctorUpload = await Doctor.create(data);
-    return res.send("created");
+    return res.send("success");
   } catch (error) {
     console.log(error);
     res.send("something wrong happens");
