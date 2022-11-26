@@ -5,11 +5,11 @@ const doctorSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  designation: {
+  qualification: {
     type: String,
     required: true,
   },
-  specialities: {
+  speciality: {
     type: String,
     required: true,
   },
