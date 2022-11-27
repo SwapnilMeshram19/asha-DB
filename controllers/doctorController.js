@@ -13,12 +13,12 @@ exports.addDoctor = async (req, res, next) => {
 
     // convert images into base 64 encoding
 
-    let img = fs.readFileSync(file.path).toString("base64");
+    // let img = fs.readFileSync(file.path).toString("base64");
 
     let result = {
       filename: file.filename,
       contentType: file.mimetype,
-      imageBase64: file.src,
+      imageBase64: fs.readFileSync(file.path).toString('base64'),
     };
 
     fs.unlink(file.path, (error) => {
@@ -28,6 +28,7 @@ exports.addDoctor = async (req, res, next) => {
     });
 
     let data = { name, qualification,speciality, profile_photo: result };
+    console.log(data)
     const doctorUpload = await Doctor.create(data);
     return res.send("success");
   } catch (error) {
@@ -39,7 +40,6 @@ exports.addDoctor = async (req, res, next) => {
 exports.getDoctors = async (req, res) => {
   try {
     const data = await Doctor.find();
-    console.log(data);
     res.send(data);
   } catch (error) {
     console.log(error);
