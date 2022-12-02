@@ -1,5 +1,6 @@
 const Event = require("../models/eventSchema");
 const fs = require("fs");
+const {ObjectId }= require('mongoose');
 
 exports.addEvent = async (req, res, next) => {
   try {
@@ -56,10 +57,23 @@ exports.addEvent = async (req, res, next) => {
 exports.getEvents = async (req, res) => {
   try {
     const data = await Event.find();
-    console.log(data);
     res.send(data);
   } catch (error) {
     console.log(error);
     res.send(error);
   }
 };
+
+exports.getEvent = async(req,res)=>{
+  try {
+
+    const {id}=req.query;
+    const data=await Event.findOne({_id:id})
+    res.send(data);
+    
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+    
+  }
+}
