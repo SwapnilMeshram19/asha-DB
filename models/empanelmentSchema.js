@@ -5,14 +5,11 @@ const empanelmentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  type: {
+  empanelmentType: {
     type: String,
     required: true,
   },
-  speciality: {
-    type: String,
-    required: true,
-  },
+ 
   
   empanelmentLogo: 
     {

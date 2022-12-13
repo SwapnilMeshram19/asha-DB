@@ -24,6 +24,7 @@ app.use(logger);
 app.use("/admin", require("./routes/admin_route"));
 app.use("/event", require("./routes/event_route"));
 app.use("/doctor", require("./routes/doctor_route"));
+app.use("/empanelment", require("./routes/empanelment_route"));
 
 connectDb()
   .then(() => {
