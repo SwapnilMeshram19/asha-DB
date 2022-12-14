@@ -28,7 +28,6 @@ exports.addDoctor = async (req, res, next) => {
     });
 
     let data = { name, qualification,speciality, profile_photo: result };
-    console.log(data)
     const doctorUpload = await Doctor.create(data);
     return res.send("success");
   } catch (error) {

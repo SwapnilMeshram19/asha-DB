@@ -28,7 +28,6 @@ exports.addEmpanelment = async (req, res, next) => {
     });
 
     let data = { name, empanelmentType, empanelmentLogo: result };
-    console.log(data)
     const empanelmentUpload = await Empanelment.create(data);
     return res.send("success");
   } catch (error) {
@@ -46,3 +45,24 @@ exports.getEmpanelments = async (req, res) => {
     res.send(error);
   }
 };
+
+
+exports.getGovernmentEmpanelment = async (req,res)=>{
+  try{
+    const data=await Empanelment.find({ empanelmentType: { $eq: "Government" } })
+    res.send(data);
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+}
+
+exports.getTpaEmpanelment = async (req,res)=>{
+  try{
+    const data=await Empanelment.find({ empanelmentType: { $eq: "Private TPA" } })
+    res.send(data);
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+}
